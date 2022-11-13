@@ -46,12 +46,12 @@ const fetchUserInfo = async (token) => {
       );
       users = insertUserRes.rows;
     } catch (error) {
-      const userRes = await pool.query(
+      const userRes2 = await pool.query(
         'SELECT * FROM public."User" WHERE email=$1',
         [email]
       );
 
-      users = userRes.rows;
+      users = userRes2.rows;
     }
   }
 
