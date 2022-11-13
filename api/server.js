@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 // const admin = require("./firebase_admin");
 const admin = require("firebase-admin");
 
-const serviceAccount = require("./serviceAccountKey.json");
+const serviceAccount = require("../serviceAccountKey.json");
 const bp = require("body-parser");
 const moment = require("moment");
 
@@ -128,7 +128,7 @@ app.post("/callback", async (request, response) => {
 
 // GET: Send report
 app.get("/send_report", async (request, response) => {
-  require("./send_mail.js")();
+  require("../send_mail.js")();
 
   response.json({ result: "OK" });
 });
