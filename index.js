@@ -5,7 +5,6 @@ const bp = require("body-parser");
 const moment = require("moment");
 const { Pool, Client } = require("pg");
 
-
 // Firebase config
 const serviceAccount = require("./serviceAccountKey.json");
 const admin = require("firebase-admin");
@@ -35,9 +34,12 @@ const pool = new Pool({
 
 // Get user info from database with jwt firebase token
 const fetchUserInfo = async (token) => {
+  console.log("token", {token});
+
   try {
     // 1) Extracts token
     const decodedToken = await admin.auth().verifyIdToken(token);
+    console.log("decodedToken", {decodedToken});
 
     const { email, uid } = decodedToken;
 
@@ -68,6 +70,7 @@ const fetchUserInfo = async (token) => {
     // 3) Return hasura variables
     return users;
   } catch (error) {
+    console.log({error});
     return error;
   }
 };
@@ -101,24 +104,25 @@ app.get("/", async (request, response) => {
 // GET: trigger webhook get or create user when login
 app.get("/webhook", async (request, response) => {
   // Extract token from request
-  var token = request.get("Authorization");
+  let token = request.get("Authorization");
+  token = token.replace(/^Bearer\s/, "");
 
   // Fetch user_id that is associated with this token
   const user = await fetchUserInfo(token);
 
-  response.json({ token, user });
+  // response.json({ token, user });
 
-  // let hasuraVariables = {};
+  let hasuraVariables = {};
 
-  // if (user.length > 0) {
-  //   hasuraVariables = {
-  //     "X-Hasura-Role": "user",
-  //     "X-Hasura-User-Id": `${user[0].id}`,
-  //   };
-  // }
+  if (user.length > 0) {
+    hasuraVariables = {
+      "X-Hasura-Role": "user",
+      "X-Hasura-User-Id": `${user[0].id}`,
+    };
+  }
 
   // Return appropriate response to Hasura
-  // response.json(hasuraVariables);
+  response.json(hasuraVariables);
 });
 
 // POST: Callback for sign in with apple
