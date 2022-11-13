@@ -4,9 +4,17 @@ const nodemailer = require("nodemailer");
 const { Pool, Client } = require("pg");
 const app = express();
 const port = process.env.PORT || 3000;
-const admin = require("./firebase_admin");
+// const admin = require("./firebase_admin");
+const admin = require("firebase-admin");
+
+const serviceAccount = require("./serviceAccountKey.json");
 const bp = require("body-parser");
 const moment = require("moment");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://monseydemo-default-rtdb.firebaseio.com/",
+});
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
