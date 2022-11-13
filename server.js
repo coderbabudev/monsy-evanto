@@ -39,11 +39,20 @@ const fetchUserInfo = async (token) => {
   let users = userRes.rows;
 
   if (!users || users.length === 0) {
-    const insertUserRes = await pool.query(
-      'INSERT INTO public."User" (uuid, name, email, avatar) VALUES ($1, $2, $3, $4) RETURNING *',
-      [uid, email, email, decodedToken.picture ?? DEFAULT_AVATAR]
-    );
-    users = insertUserRes.rows;
+    try {
+      const insertUserRes = await pool.query(
+        'INSERT INTO public."User" (uuid, name, email, avatar) VALUES ($1, $2, $3, $4) RETURNING *',
+        [uid, email, email, decodedToken.picture ?? DEFAULT_AVATAR]
+      );
+      users = insertUserRes.rows;
+    } catch (error) {
+      const userRes = await pool.query(
+        'SELECT * FROM public."User" WHERE email=$1',
+        [email]
+      );
+
+      users = userRes.rows;
+    }
   }
 
   // 3) Return hasura variables
@@ -71,8 +80,8 @@ app.get("/", async (request, response) => {
 
     // Return appropriate response to Hasura
     response.json(hasuraVariables);
-  } catch(error) {
-    response.json({error});
+  } catch (error) {
+    response.json({ error });
   }
 });
 
