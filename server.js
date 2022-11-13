@@ -124,7 +124,7 @@ app.all("/send_mail_to_borrowers", async (request, response) => {
     ["Borrowing", new Date()]
   );
 
-  const needPayTodayContracts = res.rows;
+  needPayTodayContracts = res.rows;
 
   if (!needPayTodayContracts || needPayTodayContracts.length === 0) {
     response.json({ result: "OK" });
