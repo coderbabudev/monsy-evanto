@@ -27,6 +27,7 @@ const pool = new Pool({
 const fetchUserInfo = async (token) => {
   // 1) Extracts token
   const decodedToken = await admin.auth().verifyIdToken(token);
+  console.log("Dung debug decodedToken: " + decodedToken);
 
   const { email, uid } = decodedToken;
 
@@ -35,6 +36,7 @@ const fetchUserInfo = async (token) => {
     'SELECT * FROM public."User" WHERE email=$1',
     [email]
   );
+  console.log("Dung debug userRes: " + userRes);
 
   let users = userRes.rows;
 
@@ -54,7 +56,7 @@ const fetchUserInfo = async (token) => {
       users = userRes2.rows;
     }
   }
-
+  console.log("Dung debug users: " + users);
   // 3) Return hasura variables
   return users;
 };
@@ -89,9 +91,11 @@ app.get("/", async (request, response) => {
 app.get("/webhook", async (request, response) => {
   // Extract token from request
   var token = request.get("Authorization");
+  console.log("Dung debug token: " + token);
 
   // Fetch user_id that is associated with this token
   const user = await fetchUserInfo(token);
+  console.log("Dung debug user: " + user);
 
   let hasuraVariables = {};
 
