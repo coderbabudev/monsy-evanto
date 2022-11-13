@@ -17,7 +17,7 @@ const DEFAULT_AVATAR =
 // GUEST
 const pool = new Pool({
   connectionString:
-    "postgres://lilnariornexzb:5bc7ef299d4a651dc48fb0a68d57f06d87e36d62a481953407519344c4939084@ec2-34-193-44-192.compute-1.amazonaws.com:5432/dfelsb6qtn76or",
+    "postgres://Leanhdung2881999:iW6Vyjsm3KFD@delicate-thunder-803373.cloud.neon.tech/main?options=project%3Ddelicate-thunder-803373&sslmode=require",
   ssl: {
     rejectUnauthorized: false,
   },
