@@ -4,4 +4,5 @@ const serviceAccount = require("./serviceAccountKey.json");
 
 module.exports = admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://monseydemo-default-rtdb.firebaseio.com/",
 });
