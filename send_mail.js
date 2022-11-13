@@ -11,7 +11,7 @@ var formatter = new Intl.NumberFormat("en-US", {
 // GUEST
 const pool = new Pool({
   connectionString:
-    "postgres://Leanhdung2881999:iW6Vyjsm3KFD@delicate-thunder-803373.cloud.neon.tech/main?options=project%3Ddelicate-thunder-803373&sslmode=require",
+    "postgres://Leanhdung2881999:CkXPLgAV6Zj0@calm-truth-683750.cloud.neon.tech/main?options=project%3Dcalm-truth-683750&sslmode=require",
   ssl: {
     rejectUnauthorized: false,
   },

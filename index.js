@@ -10,7 +10,6 @@ const serviceAccount = require("./serviceAccountKey.json");
 const admin = require("firebase-admin");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://monseydemo-default-rtdb.firebaseio.com/",
 });
 
 // App config
@@ -26,7 +25,7 @@ const DEFAULT_AVATAR =
 // GUEST
 const pool = new Pool({
   connectionString:
-    "postgres://Leanhdung2881999:iW6Vyjsm3KFD@delicate-thunder-803373.cloud.neon.tech/main?options=project%3Ddelicate-thunder-803373&sslmode=require",
+    "postgres://Leanhdung2881999:CkXPLgAV6Zj0@calm-truth-683750.cloud.neon.tech/main?options=project%3Dcalm-truth-683750&sslmode=require",
   ssl: {
     rejectUnauthorized: false,
   },
@@ -34,12 +33,12 @@ const pool = new Pool({
 
 // Get user info from database with jwt firebase token
 const fetchUserInfo = async (token) => {
-  console.log("token", {token});
+  console.log("token", { token });
 
   try {
     // 1) Extracts token
     const decodedToken = await admin.auth().verifyIdToken(token);
-    console.log("decodedToken", {decodedToken});
+    console.log("decodedToken", { decodedToken });
 
     const { email, uid } = decodedToken;
 
@@ -70,7 +69,7 @@ const fetchUserInfo = async (token) => {
     // 3) Return hasura variables
     return users;
   } catch (error) {
-    console.log({error});
+    console.log({ error });
     return error;
   }
 };
@@ -129,7 +128,7 @@ app.get("/webhook", async (request, response) => {
 app.post("/callback", async (request, response) => {
   const redirect = `intent://callback?${new URLSearchParams(
     request.body
-  ).toString()}#Intent;package=dev.timistudio.monseydemo;scheme=signinwithapple;end`;
+  ).toString()}#Intent;package=dev.timistudio.monseyguest;scheme=signinwithapple;end`;
 
   response.redirect(307, redirect);
 });
