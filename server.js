@@ -52,24 +52,28 @@ const fetchUserInfo = async (token) => {
 
 // GET: Hasura user information
 app.get("/", async (request, response) => {
-  // Extract token from request
-  let token = request.get("Authorization");
-  token = token.replace(/^Bearer\s/, "");
+  try {
+    // Extract token from request
+    let token = request.get("Authorization");
+    token = token.replace(/^Bearer\s/, "");
 
-  // Fetch user_id that is associated with this token
-  const users = await fetchUserInfo(token);
+    // Fetch user_id that is associated with this token
+    const users = await fetchUserInfo(token);
 
-  let hasuraVariables = {};
+    let hasuraVariables = {};
 
-  if (users.length > 0) {
-    hasuraVariables = {
-      "X-Hasura-Role": "user",
-      "X-Hasura-User-Id": `${users[0].id}`,
-    };
+    if (users.length > 0) {
+      hasuraVariables = {
+        "X-Hasura-Role": "user",
+        "X-Hasura-User-Id": `${users[0].id}`,
+      };
+    }
+
+    // Return appropriate response to Hasura
+    response.json(hasuraVariables);
+  } catch(error) {
+    response.json({error});
   }
-
-  // Return appropriate response to Hasura
-  response.json(hasuraVariables);
 });
 
 // GET: trigger webhook get or create user when login
