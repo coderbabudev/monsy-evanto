@@ -96,7 +96,7 @@ app.get("/webhook", async (request, response) => {
 app.post("/callback", async (request, response) => {
   const redirect = `intent://callback?${new URLSearchParams(
     request.body
-  ).toString()}#Intent;package=your_package;scheme=signinwithapple;end`;
+  ).toString()}#Intent;package=dev.timistudio.monseydemo;scheme=signinwithapple;end`;
 
   response.redirect(307, redirect);
 });
