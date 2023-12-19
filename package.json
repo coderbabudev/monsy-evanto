@@ -4,7 +4,7 @@
   "description": "1",
   "main": "1",
   "engines": {
-    "node": "14.x"
+    "node": "20.x"
   },
   "scripts": {
     "start": "node index.js",
@@ -13,6 +13,8 @@
   "author": "1",
   "license": "1",
   "dependencies": {
+    "14": "^3.1.6",
+    "20": "^3.1.9",
     "body-parser": "^1.20.0",
     "express": "^4.16.3",
     "firebase-admin": "10.3.0",
