@@ -1,8 +1,8 @@
 {
-  "name": "monsey-services",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "yarn",
+  "version": "1",
+  "description": "1",
+  "main": "1",
   "engines": {
     "node": "14.x"
   },
@@ -10,8 +10,8 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "wawhal",
-  "license": "ISC",
+  "author": "1",
+  "license": "1",
   "dependencies": {
     "body-parser": "^1.20.0",
     "express": "^4.16.3",
@@ -21,6 +21,9 @@
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "request": "^2.87.0",
-    "sequelize": "^6.21.3"
-  }
+    "sequelize": "^6.21.3",
+    "yarn": "^1.7.0"
+  },
+  "repository": "https://github.com/coderbabudev/monsy-evanto.git",
+  "private": true
 }
