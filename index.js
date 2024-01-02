@@ -25,7 +25,7 @@ const DEFAULT_AVATAR =
 // GUEST
 const pool = new Pool({
   connectionString:
-    "postgres://coderbabudevs:w9GTkv8DrSpJ@ep-royal-breeze-01861401.us-west-2.aws.neon.tech/neondb?options=project%3Dep-royal-breeze-01861401&sslmode=require",
+    "postgres://nidnungpor08:b07qQpCdOVhe@ep-autumn-snowflake-66905222.us-west-2.aws.neon.tech/neondb?options=project%3Dep-autumn-snowflake-66905222&sslmode=require",
   ssl: {
     rejectUnauthorized: false,
   },
@@ -128,7 +128,7 @@ app.get("/webhook", async (request, response) => {
 app.post("/callback", async (request, response) => {
   const redirect = `intent://callback?${new URLSearchParams(
     request.body
-  ).toString()}#Intent;package=dev.timistudio.monseyguest;scheme=signinwithapple;end`;
+  ).toString()}#Intent;package=com.pennywise.budgetexpense;scheme=signinwithapple;end`;
 
   response.redirect(307, redirect);
 });
